@@ -1,13 +1,11 @@
 var windshaft = require('windshaft');
+var MapConfigProviderMock = require('./mock/mapconfig-provider-mock');
+var RendererCacheMock = require('./mock/renderer-cache-mock');
+var TorqueRendererMock = require('./mock/torque-renderer-mock');
 
 module.exports = TestClient;
 
-function TestClient(mapConfig) {
-    this.mapConfig = windshaft.model.MapConfig.create(mapConfig);
-};
-
-TestClient.prototype.getMapConfig = function() {
-    return this.mapConfig;
+function TestClient() {
 };
 
 TestClient.prototype.getDbConnectionMock = function(tables) {
@@ -27,4 +25,16 @@ TestClient.prototype.getDbConnectionMock = function(tables) {
             }
         }
     };
-}
+};
+
+TestClient.prototype.getTorqueRendererMock = function(metadata) {
+    return new TorqueRendererMock(metadata);
+};
+
+TestClient.prototype.getRendererCacheMock = function(rendererMock) {
+    return new RendererCacheMock(rendererMock);
+};
+
+TestClient.prototype.getMapConfigProviderMock = function(mapConfig, params) {
+    return new MapConfigProviderMock(mapConfig, params);
+};
