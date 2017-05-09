@@ -1,16 +1,22 @@
-language: node_js
-node_js:
-  - "6"
-
-env:
-  - CXX=/usr/bin/g++-4.9
-  - CC=/usr/bin/gcc-4.9
+dist: trusty
 addons:
+  postgresql: "9.5"
   apt:
     sources:
       - ubuntu-toolchain-r-test
     packages:
-      - gcc-4.9
+      - postgresql-9.5-postgis-2.3
+      - postgresql-plpython-9.5
+      - pkg-config
+      - libcairo2-dev
+      - libjpeg8-dev
+      - libgif-dev
+      - libpango1.0-dev
       - g++-4.9
 
-sudo: false
+env:
+  - NPROCS=1 JOBS=1 PGUSER=postgres CXX=g++-4.9
+
+language: node_js
+node_js:
+  - "6"
