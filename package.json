@@ -21,7 +21,7 @@
   ],
   "dependencies": {
     "cartodb-psql": "~0.8.0",
-    "d3-queue": "^3.0.5",
+    "d3-queue": "~3.0.5",
     "debug": "~2.6.6",
     "step": "~1.0.0"
   },
