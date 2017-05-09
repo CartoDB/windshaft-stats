@@ -1,5 +1,6 @@
 {
   "name": "windshaft-stats",
+  "main": "./lib/index.js",
   "version": "0.0.1",
   "description": "A Node.js based lib to gather stats from Windshaft",
   "keywords": [
