@@ -22,7 +22,7 @@ describe('mapnik-layer-stats', function() {
                 }
             }
         ]
-    }
+    };
 
     var testMapConfigTwoLayers = {
         version: '1.5.0',
@@ -83,7 +83,7 @@ describe('mapnik-layer-stats', function() {
                 }
             },
         ]
-    }
+    };
 
     it('should return 1 feature for one layer', function(done) {
         let mapConfigProvider = this.testClient.getMapConfigProviderMock(testMapConfigOneLayer);
@@ -94,7 +94,9 @@ describe('mapnik-layer-stats', function() {
             let tables = layer.options.affected_tables || ['test_table'];
             let dbConnectionMock = this.testClient.getDbConnectionMock(tables);
             let testSubject = new MapnikLayerStats();
-            testSubject.getStats(mapConfigProvider, layer, layerId, this.params, this.rendererCacheMock, dbConnectionMock, (err, result) => {
+            testSubject.getStats(
+                mapConfigProvider, layer, layerId, this.params,
+                this.rendererCacheMock, dbConnectionMock, (err, result) => {
                 assert.ifError(err);
                 assert.equal(result.stats[0].featureCount, 1);
                 assert.equal(result.stats[0].vertexCount, 10);
@@ -113,14 +115,18 @@ describe('mapnik-layer-stats', function() {
             let tables = layer0.options.affected_tables || ['test_table'];
             let dbConnectionMock = this.testClient.getDbConnectionMock(tables);
             let testSubject = new MapnikLayerStats();
-            testSubject.getStats(mapConfigProvider, layer0, 0, this.params, this.rendererCacheMock, dbConnectionMock, (err, result) => {
+            testSubject.getStats(
+                mapConfigProvider, layer0, 0, this.params,
+                this.rendererCacheMock, dbConnectionMock, (err, result) => {
                 assert.ifError(err);
                 assert.equal(result.stats[0].featureCount, 1);
                 assert.equal(result.stats[0].vertexCount, 10);
                 assert.equal(result.stats[0].name, 'test_table');
                 tables = layer1.options.affected_tables || ['test_table'];
                 dbConnectionMock = this.testClient.getDbConnectionMock(tables);
-                testSubject.getStats(mapConfig, layer1, 1, this.params, this.rendererCacheMock, dbConnectionMock, (err, result) => {
+                testSubject.getStats(
+                    mapConfig, layer1, 1, this.params,
+                    this.rendererCacheMock, dbConnectionMock, (err, result) => {
                     assert.ifError(err);
                     assert.equal(result.stats[0].featureCount, 1);
                     assert.equal(result.stats[0].vertexCount, 10);
@@ -139,7 +145,9 @@ describe('mapnik-layer-stats', function() {
             let tables = layer.options.affected_tables || ['test_table'];
             let dbConnectionMock = this.testClient.getDbConnectionMock(tables);
             let testSubject = new MapnikLayerStats();
-            testSubject.getStats(mapConfigProvider, layer, 0, this.params, this.rendererCacheMock, dbConnectionMock, (err, result) => {
+            testSubject.getStats(
+                mapConfigProvider, layer, 0, this.params,
+                this.rendererCacheMock, dbConnectionMock, (err, result) => {
                 assert.ifError(err);
                 assert.equal(result.stats[0].featureCount, 1);
                 assert.equal(result.stats[0].vertexCount, 10);
@@ -161,7 +169,9 @@ describe('mapnik-layer-stats', function() {
             let tables = layer0.options.affected_tables || ['test_table'];
             let dbConnectionMock = this.testClient.getDbConnectionMock(tables);
             let testSubject = new MapnikLayerStats();
-            testSubject.getStats(mapConfigProvider, layer0, 0, this.params, this.rendererCacheMock, dbConnectionMock, (err, result) => {
+            testSubject.getStats(
+                mapConfigProvider, layer0, 0, this.params,
+                this.rendererCacheMock, dbConnectionMock, (err, result) => {
                 assert.ifError(err);
                 assert.equal(result.stats[0].featureCount, 1);
                 assert.equal(result.stats[0].vertexCount, 10);
@@ -171,7 +181,9 @@ describe('mapnik-layer-stats', function() {
                 assert.equal(result.stats[1].name, 'test_table_2');
                 tables = layer1.options.affected_tables || ['test_table'];
                 dbConnectionMock = this.testClient.getDbConnectionMock(tables);
-                testSubject.getStats(mapConfigProvider, layer1, 1, this.params, this.rendererCacheMock, dbConnectionMock, (err, result) => {
+                testSubject.getStats(
+                    mapConfigProvider, layer1, 1, this.params,
+                    this.rendererCacheMock, dbConnectionMock, (err, result) => {
                     assert.ifError(err);
                     assert.equal(result.stats[0].featureCount, 3);
                     assert.equal(result.stats[0].vertexCount, 30);

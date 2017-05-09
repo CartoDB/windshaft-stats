@@ -37,6 +37,8 @@
     "npm": ">=3.10"
   },
   "scripts": {
+    "lint": "jshint lib test",
+    "pretest": "npm run lint",
     "test": "mocha --recursive test",
     "test:watch": "npm run test -- -w",
     "coverage": "istanbul cover _mocha test -- --recursive"

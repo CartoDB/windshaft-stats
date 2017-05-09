@@ -1,12 +1,10 @@
-var windshaft = require('windshaft');
 var MapConfigProviderMock = require('./mock/mapconfig-provider-mock');
 var RendererCacheMock = require('./mock/renderer-cache-mock');
 var TorqueRendererMock = require('./mock/torque-renderer-mock');
 
 module.exports = TestClient;
 
-function TestClient() {
-};
+function TestClient() {}
 
 TestClient.prototype.getDbConnectionMock = function(tables) {
     return {

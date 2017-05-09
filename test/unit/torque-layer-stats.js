@@ -37,7 +37,7 @@ describe('torque-layer-stats', () => {
         let layerId = 0;
         mapConfigProviderMock.getMapConfig((err, mapConfig) => {
             assert.ifError(err);
-            layer = mapConfig.getLayer(layerId);
+            let layer = mapConfig.getLayer(layerId);
             let testSubject = new TorqueLayerStats();
             testSubject.getStats(mapConfigProviderMock, layer, layerId, {}, rendererCacheMock, {}, (err, result) => {
                 assert.ifError(err);
