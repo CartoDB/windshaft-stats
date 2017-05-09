@@ -38,6 +38,7 @@
   },
   "scripts": {
     "test": "mocha --recursive test",
-    "test:watch": "npm run test -- -w"
+    "test:watch": "npm run test -- -w",
+    "coverage": "istanbul cover _mocha test -- --recursive"
   }
 }
