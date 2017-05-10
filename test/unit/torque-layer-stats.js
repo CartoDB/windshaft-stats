@@ -1,6 +1,6 @@
-var assert = require('assert');
-var TorqueLayerStats = require('../../lib/stats/torque-layer-stats');
-var TestClient = require('../support/test-client');
+const assert = require('assert');
+const TorqueLayerStats = require('../../lib/stats/torque-layer-stats');
+const TestClient = require('../support/test-client');
 
 describe('torque-layer-stats', () => {
 
@@ -9,7 +9,7 @@ describe('torque-layer-stats', () => {
         this.params = {};
     });
 
-    var testMapConfigOneLayer = {
+    const testMapConfigOneLayer = {
         version: '1.5.0',
         layers: [
             {
@@ -24,26 +24,14 @@ describe('torque-layer-stats', () => {
     };
 
     it('should return torque stats for one layer', function(done) {
-        let fixtureResult = {
-            start: 1000,
-            end: 1000,
-            steps: 1,
-            data_steps: 100,
-            column_type: 'date'
-        };
-        let rendererMock = this.testClient.getTorqueRendererMock(fixtureResult);
-        let rendererCacheMock = this.testClient.getRendererCacheMock(rendererMock);
-        let mapConfigProviderMock = this.testClient.getMapConfigProviderMock(testMapConfigOneLayer, {});
+        let mapConfig = this.testClient.createMapConfig(testMapConfigOneLayer);
         let layerId = 0;
-        mapConfigProviderMock.getMapConfig((err, mapConfig) => {
+        let layer = mapConfig.getLayer(layerId);
+        let testSubject = new TorqueLayerStats();
+        testSubject.getStats(layer, layerId, {}, {}, (err, result) => {
             assert.ifError(err);
-            let layer = mapConfig.getLayer(layerId);
-            let testSubject = new TorqueLayerStats();
-            testSubject.getStats(mapConfigProviderMock, layer, layerId, {}, rendererCacheMock, {}, (err, result) => {
-                assert.ifError(err);
-                assert.deepEqual(fixtureResult, result);
-                done();
-            });
+            assert.deepEqual({}, result);
+            done();
         });
     });
 });
