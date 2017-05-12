@@ -88,10 +88,9 @@ describe('mapnik-layer-stats', function() {
 
     it('should return 1 feature for one layer', function(done) {
         var mapConfig = this.testClient.createMapConfig(testMapConfigOneLayer);
-        var layerId = 0;
-        var layer = mapConfig.getLayer(layerId);
+        var layer = mapConfig.getLayer(0);
         var testSubject = new MapnikLayerStats();
-        testSubject.getStats(layer, layerId, this.params, this.dbConnectionMock, function (err, result)  {
+        testSubject.getStats(layer, this.dbConnectionMock, function (err, result)  {
             assert.ifError(err);
             assert.equal(result.estimatedFeatureCount, 1);
             done();
@@ -104,10 +103,10 @@ describe('mapnik-layer-stats', function() {
         var layer0 = mapConfig.getLayer(0);
         var layer1 = mapConfig.getLayer(1);
         var testSubject = new MapnikLayerStats();
-        testSubject.getStats(layer0, 0, this.params, self.dbConnectionMock, function (err, result)  {
+        testSubject.getStats(layer0, self.dbConnectionMock, function (err, result)  {
             assert.ifError(err);
             assert.equal(result.estimatedFeatureCount, 1);
-            testSubject.getStats(layer1, 1, this.params, self.dbConnectionMock, function (err, result)  {
+            testSubject.getStats(layer1, self.dbConnectionMock, function (err, result)  {
                 assert.ifError(err);
                 assert.equal(result.estimatedFeatureCount, 1);
                 done();
@@ -119,7 +118,7 @@ describe('mapnik-layer-stats', function() {
         var mapConfig = this.testClient.createMapConfig(testMapConfigOneLayerTwoTables);
         var layer = mapConfig.getLayer(0);
         var testSubject = new MapnikLayerStats();
-        testSubject.getStats(layer, 0, this.params, this.dbConnectionMock, function (err, result)  {
+        testSubject.getStats(layer, this.dbConnectionMock, function (err, result)  {
             assert.ifError(err);
             assert.equal(result.estimatedFeatureCount, 1);
             done();
@@ -132,10 +131,10 @@ describe('mapnik-layer-stats', function() {
         var layer0 = mapConfig.getLayer(0);
         var layer1 = mapConfig.getLayer(1);
         var testSubject = new MapnikLayerStats();
-        testSubject.getStats(layer0, 0, this.params, self.dbConnectionMock, function (err, result)  {
+        testSubject.getStats(layer0, self.dbConnectionMock, function (err, result)  {
             assert.ifError(err);
             assert.equal(result.estimatedFeatureCount, 1);
-            testSubject.getStats(layer1, 1, this.params, self.dbConnectionMock, function (err, result)  {
+            testSubject.getStats(layer1, self.dbConnectionMock, function (err, result)  {
                 assert.ifError(err);
                 assert.equal(result.estimatedFeatureCount, 1);
                 done();

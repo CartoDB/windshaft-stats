@@ -28,7 +28,7 @@ describe('torque-layer-stats', function () {
         var layerId = 0;
         var layer = mapConfig.getLayer(layerId);
         var testSubject = new TorqueLayerStats();
-        testSubject.getStats(layer, layerId, {}, {}, function (err, result) {
+        testSubject.getStats(layer, {}, function (err, result) {
             assert.ifError(err);
             assert.deepEqual({}, result);
             done();
