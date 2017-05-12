@@ -89,8 +89,7 @@ describe('mapnik-layer-stats', function() {
         let mapConfig = this.testClient.createMapConfig(testMapConfigOneLayer);
         let layerId = 0;
         let layer = mapConfig.getLayer(layerId);
-        let tables = layer.options.affected_tables || ['test_table'];
-        let dbConnectionMock = this.testClient.getDbConnectionMock(tables);
+        let dbConnectionMock = this.testClient.getDbConnectionMock();
         let testSubject = new MapnikLayerStats();
         testSubject.getStats(layer, layerId, this.params, dbConnectionMock, (err, result) => {
             assert.ifError(err);
@@ -103,14 +102,12 @@ describe('mapnik-layer-stats', function() {
         let mapConfig = this.testClient.createMapConfig(testMapConfigTwoLayers);
         let layer0 = mapConfig.getLayer(0);
         let layer1 = mapConfig.getLayer(1);
-        let tables = layer0.options.affected_tables || ['test_table'];
-        let dbConnectionMock = this.testClient.getDbConnectionMock(tables);
+        let dbConnectionMock = this.testClient.getDbConnectionMock();
         let testSubject = new MapnikLayerStats();
         testSubject.getStats(layer0, 0, this.params, dbConnectionMock, (err, result) => {
             assert.ifError(err);
             assert.equal(result.estimatedFeatureCount, 1);
-            tables = layer1.options.affected_tables || ['test_table'];
-            dbConnectionMock = this.testClient.getDbConnectionMock(tables);
+            dbConnectionMock = this.testClient.getDbConnectionMock();
             testSubject.getStats(layer1, 1, this.params, dbConnectionMock, (err, result) => {
                 assert.ifError(err);
                 assert.equal(result.estimatedFeatureCount, 1);
@@ -122,12 +119,11 @@ describe('mapnik-layer-stats', function() {
     it('should return 1 feature for one layers with two tables', function(done) {
         let mapConfig = this.testClient.createMapConfig(testMapConfigOneLayerTwoTables);
         let layer = mapConfig.getLayer(0);
-        let tables = layer.options.affected_tables || ['test_table'];
-        let dbConnectionMock = this.testClient.getDbConnectionMock(tables);
+        let dbConnectionMock = this.testClient.getDbConnectionMock();
         let testSubject = new MapnikLayerStats();
         testSubject.getStats(layer, 0, this.params, dbConnectionMock, (err, result) => {
             assert.ifError(err);
-            assert.equal(result.estimatedFeatureCount, 3);
+            assert.equal(result.estimatedFeatureCount, 1);
             done();
         });
     });
@@ -136,17 +132,15 @@ describe('mapnik-layer-stats', function() {
         let mapConfig = this.testClient.createMapConfig(testMapConfigTwoLayerTwoTables);
         let layer0 = mapConfig.getLayer(0);
         let layer1 = mapConfig.getLayer(1);
-        let tables = layer0.options.affected_tables || ['test_table'];
-        let dbConnectionMock = this.testClient.getDbConnectionMock(tables);
+        let dbConnectionMock = this.testClient.getDbConnectionMock();
         let testSubject = new MapnikLayerStats();
         testSubject.getStats(layer0, 0, this.params, dbConnectionMock, (err, result) => {
             assert.ifError(err);
-            assert.equal(result.estimatedFeatureCount, 3);
-            tables = layer1.options.affected_tables || ['test_table'];
-            dbConnectionMock = this.testClient.getDbConnectionMock(tables);
+            assert.equal(result.estimatedFeatureCount, 1);
+            dbConnectionMock = this.testClient.getDbConnectionMock();
             testSubject.getStats(layer1, 1, this.params, dbConnectionMock, (err, result) => {
                 assert.ifError(err);
-                assert.equal(result.estimatedFeatureCount, 7);
+                assert.equal(result.estimatedFeatureCount, 1);
                 done();
             });
         });
