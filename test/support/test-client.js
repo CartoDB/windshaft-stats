@@ -1,4 +1,4 @@
-const MapConfig = require('windshaft').model.MapConfig;
+var MapConfig = require('windshaft').model.MapConfig;
 
 module.exports = TestClient;
 

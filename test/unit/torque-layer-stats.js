@@ -1,15 +1,15 @@
-const assert = require('assert');
-const TorqueLayerStats = require('../../lib/stats/torque-layer-stats');
-const TestClient = require('../support/test-client');
+var assert = require('assert');
+var TorqueLayerStats = require('../../lib/stats/torque-layer-stats');
+var TestClient = require('../support/test-client');
 
-describe('torque-layer-stats', () => {
+describe('torque-layer-stats', function () {
 
     beforeEach(function () {
         this.testClient = new TestClient();
         this.params = {};
     });
 
-    const testMapConfigOneLayer = {
+    var testMapConfigOneLayer = {
         version: '1.5.0',
         layers: [
             {
@@ -24,11 +24,11 @@ describe('torque-layer-stats', () => {
     };
 
     it('should return torque stats for one layer', function(done) {
-        let mapConfig = this.testClient.createMapConfig(testMapConfigOneLayer);
-        let layerId = 0;
-        let layer = mapConfig.getLayer(layerId);
-        let testSubject = new TorqueLayerStats();
-        testSubject.getStats(layer, layerId, {}, {}, (err, result) => {
+        var mapConfig = this.testClient.createMapConfig(testMapConfigOneLayer);
+        var layerId = 0;
+        var layer = mapConfig.getLayer(layerId);
+        var testSubject = new TorqueLayerStats();
+        testSubject.getStats(layer, layerId, {}, {}, function (err, result) {
             assert.ifError(err);
             assert.deepEqual({}, result);
             done();
